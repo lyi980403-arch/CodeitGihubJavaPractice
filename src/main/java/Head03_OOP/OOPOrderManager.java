@@ -1,10 +1,10 @@
-class Order {
+class Order3 {
     String customerName;
     String product;
     int quantity;
     int price;
 
-    Order(String customerName, String product, int quantity, int price){
+    Order3(String customerName, String product, int quantity, int price){
         this.customerName = customerName;
         this.product = product;
         this.quantity = quantity;
@@ -23,7 +23,7 @@ class Order {
 
 public class OOPOrderManager {
     public static void main(String[] args) {
-        Order order = new Order("Alice", "Book", 2, 15000);
+        Order3 order = new Order3("Alice", "Book", 2, 15000);
         order.printOrderSummary();
     }
 }
