@@ -1,5 +1,6 @@
-package com.sprint.mission.springhello;
+package com.sprint.mission.springhello.controller;
 
+import com.sprint.mission.springhello.UserRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

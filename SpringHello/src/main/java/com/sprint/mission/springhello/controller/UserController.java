@@ -1,4 +1,4 @@
-package com.sprint.mission.springhello;
+package com.sprint.mission.springhello.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

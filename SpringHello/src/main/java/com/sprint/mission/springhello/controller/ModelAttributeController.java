@@ -1,6 +1,6 @@
-package com.sprint.mission.springhello;
+package com.sprint.mission.springhello.controller;
 
-import org.apache.catalina.User;
+import com.sprint.mission.springhello.UserRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
