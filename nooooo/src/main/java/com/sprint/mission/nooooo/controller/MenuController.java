@@ -1,7 +1,7 @@
-package org.example.springdatajpaexample.controller;
+package com.sprint.mission.nooooo.controller;
 
-import org.example.springdatajpaexample.domain.Menu;
-import org.example.springdatajpaexample.service.MenuService;
+import com.sprint.mission.nooooo.domain.Menu;
+import com.sprint.mission.nooooo.service.MenuService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,3 +26,4 @@ public class MenuController {
     return service.search(keyword);
   }
 }
+

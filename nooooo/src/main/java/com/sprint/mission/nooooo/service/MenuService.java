@@ -1,7 +1,7 @@
-package org.example.springdatajpaexample.service;
+package com.sprint.mission.nooooo.service;
 
-import org.example.springdatajpaexample.domain.Menu;
-import org.example.springdatajpaexample.repository.MenuRepository;
+import com.sprint.mission.nooooo.domain.Menu;
+import com.sprint.mission.nooooo.repository.MenuRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,3 +27,4 @@ public class MenuService {
     return repository.findByNameContaining(keyword);
   }
 }
+

@@ -1,4 +1,4 @@
-package org.example.springdatajpaexample.domain;
+package com.sprint.mission.nooooo.domain;
 
 import jakarta.persistence.*;
 import java.time.Instant;

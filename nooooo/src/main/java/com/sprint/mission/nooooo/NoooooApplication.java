@@ -1,13 +1,13 @@
-package org.example.springdatajpaexample;
+package com.sprint.mission.nooooo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringDataJpaExampleApplication {
+public class NoooooApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(SpringDataJpaExampleApplication.class, args);
+    SpringApplication.run(NoooooApplication.class, args);
   }
 
 }
