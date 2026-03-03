@@ -69,5 +69,7 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
           WHERE m.name LIKE %:keyword%
       """)
   List<Menu> findByNameContainingWithCategory(@Param("keyword") String keyword);
+
+  List<Menu> findByCategoryName(String categoryName);
 }
 
