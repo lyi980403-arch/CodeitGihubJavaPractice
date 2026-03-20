@@ -5,6 +5,8 @@ import com.sprint.mission.nooooo.domain.Menu;
 import com.sprint.mission.nooooo.dto.MenuResponse;
 import com.sprint.mission.nooooo.repository.CategoryRepository;
 import com.sprint.mission.nooooo.repository.MenuRepository;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,20 +15,22 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
+import static jakarta.transaction.Status.STATUS_COMMITTED;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class MenuService {
 
   private final MenuRepository repository;
 
   private final CategoryRepository categoryRepository;
 
-  public MenuService(MenuRepository repository, CategoryRepository categoryRepository) {
-    this.repository = repository;
-    this.categoryRepository = categoryRepository;
-  }
+  private final AuditService auditService;
 
   @Transactional(readOnly = true)
   public MenuResponse findById(Long id) {
@@ -170,6 +174,27 @@ public class MenuService {
 
     // 3) 강제 예외 → 롤백 확인
     throw new RuntimeException("강제 예외(롤백 확인)");
+  }
+
+  @Transactional
+  public void changePriceWithAuditAndFail(Long menuId, int newPrice) {
+    log.info("[Outer] tx active={}", TransactionSynchronizationManager.isActualTransactionActive());
+
+    TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+      @Override
+      public void afterCompletion(int status) {
+        log.info("[Outer] END = {}", status == STATUS_COMMITTED ? "COMMIT" : "ROLLBACK");
+      }
+    });
+
+    // 1) 바깥 트랜잭션에서 가격 변경
+    repository.updatePrice(menuId, newPrice);
+
+    // 2) 감사 기록(항상 새 트랜잭션)
+    auditService.writeAuditMenu(1L);
+
+    // 3) 일부러 실패시켜 바깥 트랜잭션 롤백 유도
+    throw new RuntimeException("OUTER FAIL");
   }
 }
 
